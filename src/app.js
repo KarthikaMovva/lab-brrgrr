@@ -133,23 +133,26 @@ function renderButtons() {
 // //Challenge 2 - Render only the items selected in the ingredients board based on the state
 
 function renderIngredientsBoard() {
-  const m3 = document.querySelector(".menu-container");
+  const button = document.querySelector(".menu-container");
   let hyperText = `<h3>Ingredients</h3>`
   for (let ingredient of Object.keys(state)){
     if(state[ingredient]){
       hyperText += `<p class="items">${ingredient}</p>`
     }
   }
-  m3.innerHTML = hyperText;
+  button.innerHTML = hyperText;
 }
 
 // //Judgement 1
 // //In the p element having price-details as the class, display the calculated
 // //price based on ingredients
-function renderPrice() {
-  let bill = Object.keys(state).reduce((total, ingredient) => {
-    return total + (state[ingredient] ? ingredients[ingredient] : 0);
-  }, wholeWheatBun);
-  
-  document.querySelector(".price-details").textContent = "INR" + bill;
+
+function renderPrice(){
+  let bill = wholeWheatBun;
+  Object.keys(state).forEach(ingredient =>{
+  if(state[ingredient]){
+    bill+=ingredients[ingredient];
+  }
+  });
+  document.querySelector(".price-details").textContent = "INR"+bill;
 }
